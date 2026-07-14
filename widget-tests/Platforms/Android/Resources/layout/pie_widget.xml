@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#FF1C1C1E"
+	android:padding="6dp">
+
+	<TextView
+		android:id="@+id/pie_widget_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:text="Pie Chart"
+		android:textColor="#FFFFFFFF"
+		android:textSize="13sp"
+		android:textStyle="bold"
+		android:gravity="center"
+		android:paddingBottom="4dp" />
+
+	<ImageView
+		android:id="@+id/pie_chart_image"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/pie_widget_title"
+		android:layout_alignParentBottom="true"
+		android:scaleType="fitCenter"
+		android:contentDescription="Pie chart" />
+
+</RelativeLayout>

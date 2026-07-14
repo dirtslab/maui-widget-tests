@@ -4,29 +4,49 @@ namespace widget_tests
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void OnUpdateWidgetClicked(object? sender, EventArgs e)
         {
-            count++;
+            var labels = new[]
+            {
+                Label1.Text ?? "A",
+                Label2.Text ?? "B",
+                Label3.Text ?? "C",
+                Label4.Text ?? "D",
+            };
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            var values = new[]
+            {
+                ParseValue(Value1.Text),
+                ParseValue(Value2.Text),
+                ParseValue(Value3.Text),
+                ParseValue(Value4.Text),
+            };
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            if (values.All(v => v <= 0))
+            {
+                StatusLabel.TextColor = Colors.Red;
+                StatusLabel.Text = "Please enter at least one positive value.";
+                return;
+            }
+
+            PieChartWidgetProvider.UpdateWidgets(
+                global::Android.App.Application.Context, values, labels);
+
+            StatusLabel.TextColor = Colors.Green;
+            StatusLabel.Text = "Widget updated!";
         }
 
-        private void OnEntryButtonClicked(object? sender, EventArgs e)
+        private static float ParseValue(string? text)
         {
-            var text = Entry1.Text ?? string.Empty;
-            FieldWidgetProvider.UpdateWidgets(global::Android.App.Application.Context, text);
+            if (float.TryParse(text, System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out var result) && result > 0)
+                return result;
+            return 0f;
         }
     }
 }

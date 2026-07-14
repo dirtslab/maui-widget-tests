@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="widget_tests.ConfigPage"
+             Title="ConfigPage">
+    <VerticalStackLayout>
+        <Label Text="crude widget tester"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        <Entry Placeholder="Widget 1"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        <Entry Placeholder="Widget 2"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

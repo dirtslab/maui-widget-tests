@@ -30,6 +30,16 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+            
+            <Entry x:Name="Entry1"
+                   Placeholder="Change the widget text"
+                   SemanticProperties.Hint="This is an entry field" />
+            
+            <Button x:Name="EntryButton"
+                    Text="Submit"
+                    SemanticProperties.Hint="Submits the entry text"
+                    Clicked="OnEntryButtonClicked"
+                    HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

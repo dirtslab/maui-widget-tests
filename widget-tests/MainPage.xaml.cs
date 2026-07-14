@@ -1,4 +1,6 @@
-﻿namespace widget_tests
+﻿using widget_tests.Platforms.Android;
+
+namespace widget_tests
 {
     public partial class MainPage : ContentPage
     {
@@ -19,6 +21,12 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+
+        private void OnEntryButtonClicked(object? sender, EventArgs e)
+        {
+            var text = Entry1.Text ?? string.Empty;
+            FieldWidgetProvider.UpdateWidgets(global::Android.App.Application.Context, text);
         }
     }
 }

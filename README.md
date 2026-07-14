@@ -155,11 +155,9 @@ Note: There is another way to declare a widget, using the manifest. This achieve
 5. Build and deploy to Android
      - Long-press home screen -> Widgets -> select your app widget.
 
-## Notes and Constraints
+## Create Widget with Chart
 
-- RemoteViews supports only specific view types and update methods.
-- Frequent periodic updates are limited by Android; use event-driven updates when possible.
-- More widget UI/behavior options are available on newer API levels (for example Android 12+ improvements).
+There is no straightforward way to implement libraries into widgets or other complex elements than the ones that are built into `RemoteView`. In order to do this, we have to resort to creating a bitmap image in a `Canvas` view and then providing it to the widget. It is not the nicest, however it is the only possible way.
 
 ## Widget-able Parts of ESMobile
 

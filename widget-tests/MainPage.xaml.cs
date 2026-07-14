@@ -4,6 +4,8 @@ namespace widget_tests
 {
     public partial class MainPage : ContentPage
     {
+        private int count = 0;
+
         public MainPage()
         {
             InitializeComponent();
@@ -47,6 +49,24 @@ namespace widget_tests
                     System.Globalization.CultureInfo.InvariantCulture, out var result) && result > 0)
                 return result;
             return 0f;
+        }
+
+        private void OnCounterClicked(object? sender, EventArgs e)
+        {
+            count++;
+
+            if (count == 1)
+                CounterBtn.Text = $"Clicked {count} time";
+            else
+                CounterBtn.Text = $"Clicked {count} times";
+
+            SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+
+        private void OnEntryButtonClicked(object? sender, EventArgs e)
+        {
+            var text = Entry1.Text ?? string.Empty;
+            FieldWidgetProvider.UpdateWidgets(global::Android.App.Application.Context, text);
         }
     }
 }

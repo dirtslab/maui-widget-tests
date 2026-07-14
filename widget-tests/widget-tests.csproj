@@ -51,8 +51,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Include="Platforms\Android\Resources\layout\button_widget.xml" />
-	  <AndroidResource Include="Platforms\Android\Resources\xml\button_widget_info.xml" />
+	  <AndroidResource Include="Platforms\Android\Resources\**\*" />
 	</ItemGroup>
 
 	<ItemGroup>

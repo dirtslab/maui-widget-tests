@@ -75,7 +75,7 @@ using Android.Widget;
 
 namespace YourApp;
 
-[BroadcastReceiver(Label = "My Widget")]
+[BroadcastReceiver(Exported = true, Label = "My Widget")]
 [IntentFilter(new[] { AppWidgetManager.ActionAppwidgetUpdate })]
 [MetaData("android.appwidget.provider", Resource = "@xml/my_widget_info")]
 public class MyWidgetProvider : AppWidgetProvider
@@ -125,12 +125,35 @@ public class MyWidgetProvider : AppWidgetProvider
 </LinearLayout>
 ```
 
-4. Build and deploy to Android
-     - Long-press home screen -> Widgets -> select your app widget.
+*Note: Visual Studio by default edits the project file to remove the new files from the project. Make sure to change it to specifically include them:
 
-5. Trigger updates when app data changes
-     - Send a broadcast for APPWIDGET_UPDATE or call update logic from Android-side code.
-     - Keep updates efficient to avoid battery impact.
+```xml
+	<ItemGroup>
+	  <AndroidResource Include="Platforms\Android\Resources\layout\my_widget.xml" />
+	  <AndroidResource Include="Platforms\Android\Resources\xml\my_widget_info.xml" />
+	</ItemGroup>
+```
+
+Note: There is another way to declare a widget, using the manifest. This achieves the same thing as declaring it in the provider. If it is declared in both, it may create duplicates in the widget menu. For examples of both methods, see the "Button Widget" (declared in manifest) and the "Field Widget" (declared in provider).
+
+```xml
+<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
+	<receiver
+		android:name=".MyWidgetProvider"
+		android:exported="true"
+		android:label="My Widget">
+		<intent-filter>
+			<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+		</intent-filter>
+		<meta-data
+			android:name="android.appwidget.provider"
+			android:resource="@xml/my_widget_info" />
+	</receiver>
+</application>
+```
+
+5. Build and deploy to Android
+     - Long-press home screen -> Widgets -> select your app widget.
 
 ## Notes and Constraints
 

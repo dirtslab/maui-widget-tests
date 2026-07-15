@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 	<string name="widget_button_text">This has been clicked 0 times</string>
+	<string name="quick_button_1">Launch 1</string>
+	<string name="quick_button_2">Launch 2</string>
+	<string name="quick_button_3">Launch 3</string>
+	<string name="quick_button_4">Launch 4</string>
 </resources>

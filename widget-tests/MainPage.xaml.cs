@@ -1,4 +1,5 @@
-﻿using widget_tests.Platforms.Android;
+﻿using Microsoft.Maui.Storage;
+using widget_tests.Platforms.Android;
 
 namespace widget_tests
 {
@@ -9,6 +10,16 @@ namespace widget_tests
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        public void SetWelcomeLabelForLauncherButton(int buttonNumber)
+        {
+            WelcomeLabel.Text = $"Opened with button {buttonNumber}";
         }
 
         private void OnUpdateWidgetClicked(object? sender, EventArgs e)

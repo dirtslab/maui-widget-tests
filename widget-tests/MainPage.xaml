@@ -13,8 +13,8 @@
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a submarine number ten" />
 
-            <Label
-                Text="Hello, World!"
+            <Label x:Name="WelcomeLabel"
+                   Text="Hello, World!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 

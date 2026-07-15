@@ -47,6 +47,7 @@ In a MAUI project, the widget pieces typically live under Platforms/Android:
 
 5. Update mechanism
      - Updates are pushed with AppWidgetManager.UpdateAppWidget.
+     - Partial updates possible with AppWidgetManager.partiallyUpdateAppWidget.
      - Use event-driven updates where possible; periodic updates are power-constrained.
 
 ## Lifecycle Overview
@@ -63,6 +64,7 @@ In a MAUI project, the widget pieces typically live under Platforms/Android:
 - Widget provider reads the needed data (for example from shared preferences, database, or local cache).
 - Provider builds a RemoteViews instance and updates each widget id.
 - Optional click actions use PendingIntent to launch an Activity or send a broadcast.
+    - These Intents are then captured by the MainActivity to be handled and perform tasks
 
 ## Add a Widget to a C# MAUI App
 
@@ -158,6 +160,33 @@ Note: There is another way to declare a widget, using the manifest. This achieve
 ## Create Widget with Chart
 
 There is no straightforward way to implement libraries into widgets or other complex elements than the ones that are built into `RemoteView`. In order to do this, we have to resort to creating a bitmap image in a `Canvas` view and then providing it to the widget. It is not the nicest, however it is the only possible way.
+
+## Examples in This Repository
+
+### Button Widget
+
+Layout: Simple Button\
+Example of maintaining state for widgets and allowing them to perform self-encapsulated actions, such as incrementing a counter.
+
+### Field Widget
+
+Layout: Simple TextView\
+Example of updating state of a widget from the application, text can be entered in the app page which will then be persisted on the widget.
+
+### Launcher Widget
+
+Layout: Grid of Buttons\
+Example of a grid layout widget, as well as interaction that launches the application in a specific state. This uses Intents to open the application and then set its state through the MainActivity.
+
+### Pie Widget
+
+Layout: TextView and ImageView with background\
+More advanced widget, shows drawing on a canvas to then use the produced image for the widget.
+
+### List Widget
+
+Layout: ListView\
+Interactive list, shows presenting a scrollable set of items as well as returning to the application with a specific state when one of the items is tapped. This also uses Intents.
 
 ## Widget-able Parts of ESMobile
 

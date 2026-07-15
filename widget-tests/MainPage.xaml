@@ -76,6 +76,18 @@
                     SemanticProperties.Hint="Submits the entry text"
                     Clicked="OnEntryButtonClicked"
                     HorizontalOptions="Fill" />
+            
+            <Button x:Name="AddItemButton"
+                    Text="Add Item"
+                    SemanticProperties.Hint="Adds a new item to the list"
+                    Clicked="OnAddItemClicked"
+                    HorizontalOptions="Fill" />
+
+            <Button x:Name="RemoveItemButton"
+                    Text="Remove Item"
+                    SemanticProperties.Hint="Removes the latest item from the list"
+                    Clicked="OnRemoveItemClicked"
+                    HorizontalOptions="Fill" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Storage;
+﻿using Kotlin.Jvm;
+using Microsoft.Maui.Storage;
 using widget_tests.Platforms.Android;
 
 namespace widget_tests
@@ -6,6 +7,7 @@ namespace widget_tests
     public partial class MainPage : ContentPage
     {
         private int count = 0;
+        private int itemCount = 0;
 
         public MainPage()
         {
@@ -20,6 +22,11 @@ namespace widget_tests
         public void SetWelcomeLabelForLauncherButton(int buttonNumber)
         {
             WelcomeLabel.Text = $"Opened with button {buttonNumber}";
+        }
+
+        public void OpenWithItem(string itemName)
+        {
+            WelcomeLabel.Text = $"Opened with item: {itemName}";
         }
 
         private void OnUpdateWidgetClicked(object? sender, EventArgs e)
@@ -78,6 +85,30 @@ namespace widget_tests
         {
             var text = Entry1.Text ?? string.Empty;
             FieldWidgetProvider.UpdateWidgets(global::Android.App.Application.Context, text);
+        }
+
+        private void OnAddItemClicked(object? sender, EventArgs e)
+        {
+            itemCount++;
+            var itemName = $"item {itemCount}";
+            ListWidgetProvider.AddItem(global::Android.App.Application.Context, itemName);
+            StatusLabel.TextColor = Colors.Green;
+            StatusLabel.Text = $"Added {itemName}";
+        }
+
+        private void OnRemoveItemClicked(object? sender, EventArgs e)
+        {
+            if (ListWidgetProvider.RemoveLastItem(global::Android.App.Application.Context, out var removedItem))
+            { 
+
+                StatusLabel.TextColor = Colors.Green;
+                StatusLabel.Text = $"Removed {removedItem}";
+            }
+            else
+            {
+                StatusLabel.TextColor = Colors.Red;
+                StatusLabel.Text = "No items to remove.";
+            }
         }
     }
 }

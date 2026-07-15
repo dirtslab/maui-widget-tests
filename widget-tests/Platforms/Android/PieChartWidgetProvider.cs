@@ -2,6 +2,7 @@ using Android.App;
 using Android.Appwidget;
 using Android.Content;
 using Android.Graphics;
+using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AColor = Android.Graphics.Color;
@@ -38,6 +39,8 @@ namespace widget_tests.Platforms.Android
 
             foreach (var id in appWidgetIds)
                 UpdateWidget(context, appWidgetManager, id, values, labels);
+
+            UpdateGeneratedPreview(context, appWidgetManager, values, labels);
         }
 
         /// <summary>Called from the main page whenever the user submits new data.</summary>
@@ -51,17 +54,34 @@ namespace widget_tests.Platforms.Android
 
             foreach (var id in ids)
                 UpdateWidget(context, manager, id, values, labels);
+
+            UpdateGeneratedPreview(context, manager, values, labels);
         }
 
         private static void UpdateWidget(Context context, AppWidgetManager manager, int widgetId,
             float[] values, string[] labels)
         {
-            var views = new RemoteViews(context.PackageName, Resource.Layout.pie_widget);
-
-            var bitmap = DrawPieChart(values, labels, 400, 400);
-            views.SetImageViewBitmap(Resource.Id.pie_chart_image, bitmap);
-
+            var views = CreatePieRemoteViews(context, values, labels, 400, 400);
             manager.UpdateAppWidget(widgetId, views);
+        }
+
+        private static void UpdateGeneratedPreview(Context context, AppWidgetManager manager, float[] values, string[] labels)
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.VanillaIceCream)
+                return;
+
+            var component = new ComponentName(context, Java.Lang.Class.FromType(typeof(PieChartWidgetProvider)));
+            var preview = CreatePieRemoteViews(context, values, labels, 420, 420);
+
+            manager.SetWidgetPreview(component, AppWidgetCategory.HomeScreen, preview);
+        }
+
+        private static RemoteViews CreatePieRemoteViews(Context context, float[] values, string[] labels, int width, int height)
+        {
+            var views = new RemoteViews(context.PackageName, Resource.Layout.pie_widget);
+            var bitmap = DrawPieChart(values, labels, width, height);
+            views.SetImageViewBitmap(Resource.Id.pie_chart_image, bitmap);
+            return views;
         }
 
         // ── Drawing ──────────────────────────────────────────────────────────
